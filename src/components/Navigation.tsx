@@ -55,6 +55,7 @@ const Navigation = () => {
     { path: "/rooms", label: "Suites" },
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
+    { path: "https://gym-chi-rust.vercel.app/", label: "Gym", external: true },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -111,27 +112,43 @@ const Navigation = () => {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-2">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="relative px-5 py-2.5 group"
-                >
-                  <span className={`relative z-10 text-sm font-medium transition-all duration-300 ${
-                    isActive(link.path)
-                      ? "text-primary"
-                      : "text-foreground/70 group-hover:text-foreground"
-                  }`}>
-                    {link.label}
-                  </span>
-                  {isActive(link.path) && (
-                    <motion.span
-                      layoutId="activeNav"
-                      className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <span className="absolute inset-0 rounded-full bg-foreground/5 scale-0 group-hover:scale-100 transition-transform duration-300 ease-out" />
-                </Link>
+                link.external ? (
+                  <a
+                    key={link.path}
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative px-5 py-2.5 group"
+                  >
+                    <span className="relative z-10 text-sm font-medium text-foreground/70 group-hover:text-foreground transition-all duration-300">
+                      {link.label}
+                    </span>
+                    <ArrowUpRight className="w-3 h-3 absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="absolute inset-0 rounded-full bg-foreground/5 scale-0 group-hover:scale-100 transition-transform duration-300 ease-out" />
+                  </a>
+                ) : (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="relative px-5 py-2.5 group"
+                  >
+                    <span className={`relative z-10 text-sm font-medium transition-all duration-300 ${
+                      isActive(link.path)
+                        ? "text-primary"
+                        : "text-foreground/70 group-hover:text-foreground"
+                    }`}>
+                      {link.label}
+                    </span>
+                    {isActive(link.path) && (
+                      <motion.span
+                        layoutId="activeNav"
+                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className="absolute inset-0 rounded-full bg-foreground/5 scale-0 group-hover:scale-100 transition-transform duration-300 ease-out" />
+                  </Link>
+                )
               ))}
             </div>
 
