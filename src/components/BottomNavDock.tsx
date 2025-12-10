@@ -1,4 +1,4 @@
-import { Home, Key, User, Phone } from "lucide-react";
+import { Home, Key, User, Phone, Dumbbell } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const BottomNavDock = () => {
@@ -7,6 +7,7 @@ const BottomNavDock = () => {
   const navItems = [
     { icon: Home, label: "Home", path: "/" },
     { icon: Key, label: "Rooms", path: "/rooms" },
+    { icon: Dumbbell, label: "Gym", path: "https://gym-chi-rust.vercel.app/", external: true },
     { icon: User, label: "About", path: "/about" },
     { icon: Phone, label: "Contact", path: "/contact" },
   ];
